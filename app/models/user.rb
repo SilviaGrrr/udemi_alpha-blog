@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+
+  has_many :articles
     validates :username, presence: true,  uniqueness: { case_sensitive: false }, length: {minimum: 3, maximum: 25 }
 
     VALID_EMAIL_FORMAT = /\A[a-z0-9\+\-_\.]+@[a-z\d\-.]+\.[a-z]+\z/i
