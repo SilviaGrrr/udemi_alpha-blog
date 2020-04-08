@@ -1,9 +1,13 @@
 class User < ApplicationRecord
   before_save { self.email = email.downcase }
+
   has_many :articles
-    validates :username, presence: true,  uniqueness: { case_sensitive: false }, length: {minimum: 3, maximum: 25 }
 
-    VALID_EMAIL_FORMAT = /\A[a-z0-9\+\-_\.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :username, presence: true,  uniqueness: { case_sensitive: false }, length: {minimum: 3, maximum: 25 }
 
-    validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 125 }, format: { with: VALID_EMAIL_FORMAT }
+  VALID_EMAIL_FORMAT = /\A[a-z0-9\+\-_\.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 125 }, format: { with: VALID_EMAIL_FORMAT }
+
+  has_secure_password
 end
